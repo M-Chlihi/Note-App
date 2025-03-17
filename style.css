@@ -243,6 +243,8 @@ header,
   box-shadow: none;
   border-radius: 0;
   justify-content: flex-start;
+    color: var(--span-color);
+
 }
 
 .menu li:last-child {
@@ -343,6 +345,8 @@ form :where(input, textarea) {
   border-radius: 4px;
   border: 1px solid var(--secondary-color);
   background-color: var(--tt-color);
+    color: var(--span-color);
+
 }
 
 form :where(input, textarea):focus {

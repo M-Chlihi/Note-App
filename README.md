@@ -42,3 +42,6 @@ Note-App/
 
 # Future Improvements
 Cloud sync with user login
+
+Try it live: https://chlihi-noteapp.vercel.app/
+

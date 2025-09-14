@@ -30,11 +30,11 @@ This project is kept simple and clean:
 
 Note-App/
 │── index.html # Main HTML file
+
 │── style.css # Styling (CSS)
 │── script.js # App logic (JavaScript)
 │── imgs/ # Icons and images
 │── README.md # Project documentation
 
 # Future Improvements
-
 Cloud sync with user login

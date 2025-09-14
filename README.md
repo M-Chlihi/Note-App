@@ -29,11 +29,15 @@ This project is kept simple and clean:
    git clone https://github.com/M-Chlihi/Note-App.git
 
 Note-App/
+
 │── index.html # Main HTML file
 
 │── style.css # Styling (CSS)
+
 │── script.js # App logic (JavaScript)
+
 │── imgs/ # Icons and images
+
 │── README.md # Project documentation
 
 # Future Improvements

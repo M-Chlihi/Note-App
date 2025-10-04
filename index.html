@@ -2,49 +2,201 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Notes App </title>
+    <title>ZeNote Task Manager</title>
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imgs/edit.png">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="darkmode">
-
-    <div>
-      <button id="theme-switch">
-       
-        <img src="imgs/dark_mode_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg" alt="">
-        <img  class="bla" src="imgs/light_mode_24dp_434343_FILL1_wght400_GRAD0_opsz24.svg" alt="">
+  <body>
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <i class="uil uil-check-circle"></i>
+          <span>ZeNote</span>
+        </div>
+        <nav class="nav">
+          <a href="#" class="nav-item active" data-filter="all">
+            <i class="uil uil-list-ul"></i>
+            <span>All Tasks</span>
+          </a>
+          <a href="#" class="nav-item" data-filter="pending">
+            <i class="uil uil-clock"></i>
+            <span>Pending</span>
+          </a>
+          <a href="#" class="nav-item" data-filter="completed">
+            <i class="uil uil-check"></i>
+            <span>Completed</span>
+          </a>
+        </nav>
+      </div>
+      <div class="header-right">
         
-      </button>
-      <H1> Your Brain is for Thinking, Not Remembering Everything</H1>
-    </div>
-    <div class="popup-box">
-      <div class="popup">
-        <div class="content">
-          <header>
-            <p></p>
-            <i class="uil uil-times"></i>
-          </header>
-          <form action="#">
-            <div class="row title">
-              <label>Title</label>
-              <input type="text" spellcheck="false" />
-            </div>
-            <div class="row description">
-              <label>Description</label>
-              <textarea spellcheck="false"></textarea>
-            </div>
-            <button></button>
-          </form>
+        <button class="pomodoro-btn" id="pomodoro-btn" title="Pomodoro Timer">
+          <i class="uil uil-clock"></i>
+        </button>
+        <button id="theme-switch" class="theme-switch">
+          <i class="uil uil-moon"></i>
+          <i class="uil uil-sun"></i>
+        </button>
+        <button class="add-task-btn" id="add-task-btn">
+          <i class="uil uil-plus"></i>
+          <span>Add Task</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- main -->
+    <main class="main-content">
+      <div class="content-header">
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number" id="total-tasks">0</span>
+            <span class="stat-label">Total Tasks</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="completed-tasks">0</span>
+            <span class="stat-label">Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="pending-tasks">0</span>
+            <span class="stat-label">Pending</span>
+          </div>
         </div>
       </div>
+
+      <div class="tasks-container">
+        <div class="tasks-grid" id="tasks-grid">
+        </div>
+      </div>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modal-title">Add New Task</h2>
+          <button class="close-btn" id="close-modal">
+            <i class="uil uil-times"></i>
+          </button>
+        </div>
+        <form class="modal-form" id="task-form">
+          <div class="form-group">
+            <label for="task-title">Task Title</label>
+            <input type="text" id="task-title" placeholder="Enter task title..." required>
+          </div>
+          <div class="form-group">
+            <label for="task-description">Description</label>
+            <textarea id="task-description" placeholder="Enter task description..."></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="task-priority">Priority</label>
+              <select id="task-priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-category">Category</label>
+              <select id="task-category">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="shopping">Shopping</option>
+                <option value="health">Health</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="task-due-date">Due Date (Optional)</label>
+            <input type="date" id="task-due-date">
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-btn">Save Task</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="wrapper">
-      <li class="add-box">
-        <div class="icon"><i class="uil uil-plus"></i></div>
-        <p>Add new note</p>
-      </li>
+
+    <div class="pomodoro-modal" id="pomodoro-modal">
+      <div class="pomodoro-container">
+        <div class="pomodoro-header">
+          <h2>Pomodoro Timer</h2>
+          <button class="pomodoro-close-btn" id="pomodoro-close-btn">
+            <i class="uil uil-times"></i>
+          </button>
+        </div>
+        
+        <div class="pomodoro-content">
+
+          <div class="timer-display">
+            <div class="timer-circle">
+              <svg class="timer-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" class="timer-bg"></circle>
+                <circle cx="50" cy="50" r="45" class="timer-progress" id="timer-progress"></circle>
+              </svg>
+              <div class="timer-text">
+                <div class="timer-time" id="timer-time">25:00</div>
+                <div class="timer-session" id="timer-session">Focus Time</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="session-controls">
+            <div class="session-buttons">
+              <button class="session-btn active" data-session="focus" data-duration="25">
+                <i class="uil uil-focus"></i>
+                <span>Focus</span>
+                <small>25 min</small>
+              </button>
+              <button class="session-btn" data-session="short-break" data-duration="5">
+                <i class="uil uil-coffee"></i>
+                <span>Short Break</span>
+                <small>5 min</small>
+              </button>
+              <button class="session-btn" data-session="long-break" data-duration="15">
+                <i class="uil uil-restaurant"></i>
+                <span>Long Break</span>
+                <small>15 min</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="timer-controls">
+            <button class="control-btn start-btn" id="start-timer">
+              <i class="uil uil-play"></i>
+              <span>Start</span>
+            </button>
+            <button class="control-btn pause-btn" id="pause-timer" style="display: none;">
+              <i class="uil uil-pause"></i>
+              <span>Pause</span>
+            </button>
+            <button class="control-btn reset-btn" id="reset-timer">
+              <i class="uil uil-refresh"></i>
+              <span>Reset</span>
+            </button>
+          </div>
+
+          <div class="session-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="completed-sessions">0</span>
+              <span class="stat-label">Sessions</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="total-focus-time">0</span>
+              <span class="stat-label">Minutes</span>
+            </div>
+          </div>
+
+          <div class="current-task" id="current-task-section" style="display: none;">
+            <div class="current-task-label">Working on:</div>
+            <div class="current-task-name" id="current-task-name"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>

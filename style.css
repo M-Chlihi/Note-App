@@ -3,6 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+
 :root {
   --primary-color: #6366f1;
   --primary-hover: #5855eb;
@@ -50,7 +52,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Headerr */
+/* Headerr sec */
 .header {
   background: var(--surface-color);
   border-bottom: 1px solid var(--border-color);

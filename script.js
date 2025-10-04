@@ -302,11 +302,10 @@ class TaskManager {
       this.tasksGrid.appendChild(taskCard);
     });
   }
-
   createTaskCard(task) {
     const card = document.createElement('div');
     card.className = `task-card ${task.completed ? 'completed' : ''}`;
-    card.dataset.taskId = task.id; // Store task id in data attribute
+    card.dataset.taskId = task.id; 
     
     const dueDate = task.dueDate ? new Date(task.dueDate) : null;
     const isOverdue = dueDate && dueDate < new Date() && !task.completed;
